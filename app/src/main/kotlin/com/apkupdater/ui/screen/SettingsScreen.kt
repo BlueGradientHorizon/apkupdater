@@ -177,6 +177,12 @@ fun Settings(viewModel: SettingsViewModel) = LazyColumn {
 				6,
 				R.drawable.ic_landscape
 			)
+			SwitchSetting(
+				{ viewModel.getVersionNameInsteadCode() },
+				{ viewModel.setVersionNameInsteadCode(it) },
+				stringResource(R.string.version_name_instead_code),
+				R.drawable.ic_number
+			)
 		}
 		SwitchSetting(
 			{ viewModel.getPlayTextAnimations() },

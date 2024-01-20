@@ -36,4 +36,5 @@ class Prefs(
 	val rootInstall = boolean("rootInstall", defValue = false, backed = true)
 	val theme = int("theme", defValue = 0, backed = true)
 	val lastTab = string("lastTab", defValue = Screen.Updates.route, backed = true)
+	val versionNameInsteadCode = boolean("versionNameInsteadCode", defValue = false, backed = true)
 }

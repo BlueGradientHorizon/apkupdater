@@ -9,7 +9,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,22 +38,21 @@ import org.koin.androidx.compose.get
 
 
 @Composable
-fun TextBubble(code: Long, modifier: Modifier = Modifier) = TextBubble(
-    if (code == 0L) "?" else code.toString(),
-    modifier
-)
-
-@Composable
-fun TextBubble(text: String, modifier: Modifier = Modifier) = Text(
-    modifier = Modifier
+fun TextBubble(text: String, modifier: Modifier = Modifier, scrollable: Boolean = false) {
+    val bubbleModifier = Modifier
         .padding(4.dp)
         .background(
             color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f),
             shape = RoundedCornerShape(16.dp)
         )
-        .then(modifier),
-    text = "  $text  "
-)
+        .padding(horizontal = 8.dp)
+        .then(modifier)
+
+    if (scrollable)
+        ScrollableText(bubbleModifier) { Text(text) }
+    else
+        Text(text, bubbleModifier)
+}
 
 @Composable
 fun SmallText(text: String, modifier: Modifier = Modifier) = Text(
@@ -138,14 +136,12 @@ fun ScrollableText(
         }
         LaunchedEffect(outer.value) { effect(state) }
     }
-    
-    Row(Modifier.onSizeChanged { outer.value = it }) {
+
+    Row(modifier.onSizeChanged { outer.value = it }) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
                 .horizontalScroll(state)
-                .onSizeChanged { inner.value = it }
-                .then(modifier),
+                .onSizeChanged { inner.value = it },
             content = content
         )
     }

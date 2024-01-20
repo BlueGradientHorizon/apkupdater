@@ -57,6 +57,7 @@
     <string name="about_donate">If you like the app, consider donating to a worthy cause.</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="copy_app_list">Copy App List</string>
+    <string name="version_name_instead_code">Show version name instead numeric code</string>
 
     // Notifications
     <string name="notification_channel_name">Updates</string>

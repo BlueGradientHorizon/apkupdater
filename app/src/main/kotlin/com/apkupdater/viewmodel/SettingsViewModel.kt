@@ -38,6 +38,8 @@ class SettingsViewModel(
 	fun getLandscapeColumns() = prefs.landscapeColumns.get()
 	fun setPlayTextAnimations(b: Boolean) = prefs.playTextAnimations.put(b)
 	fun getPlayTextAnimations() = prefs.playTextAnimations.get()
+	fun getVersionNameInsteadCode() = prefs.versionNameInsteadCode.get()
+	fun setVersionNameInsteadCode(b: Boolean) = prefs.versionNameInsteadCode.put(b)
 	fun setIgnoreAlpha(b: Boolean) = prefs.ignoreAlpha.put(b)
 	fun getIgnoreAlpha() = prefs.ignoreAlpha.get()
 	fun setIgnoreBeta(b: Boolean) = prefs.ignoreBeta.put(b)
