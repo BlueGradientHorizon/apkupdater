@@ -121,6 +121,5 @@ fun getAppVersion(app: AppUpdate): String {
 }
 
 @SuppressLint("ModifierFactoryExtensionFunction")
-@Composable
 fun BoxScope.defaultTextBubbleModifier() =
 	Modifier.align(Alignment.BottomStart).widthIn(max = 120.dp)
