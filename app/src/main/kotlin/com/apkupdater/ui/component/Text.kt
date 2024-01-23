@@ -38,21 +38,18 @@ import org.koin.androidx.compose.get
 
 
 @Composable
-fun TextBubble(text: String, modifier: Modifier = Modifier, scrollable: Boolean = false) {
-    val bubbleModifier = Modifier
+fun TextBubble(text: String, modifier: Modifier = Modifier, autoScrollable: Boolean = false) = ScrollableText(
+    modifier = Modifier
         .padding(4.dp)
         .background(
             color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f),
             shape = RoundedCornerShape(16.dp)
         )
         .padding(horizontal = 8.dp)
-        .then(modifier)
-
-    if (scrollable)
-        ScrollableText(bubbleModifier) { Text(text) }
-    else
-        Text(text, bubbleModifier)
-}
+        .then(modifier),
+    autoScroll = autoScrollable,
+    content = { Text(text) }
+)
 
 @Composable
 fun SmallText(text: String, modifier: Modifier = Modifier) = Text(
@@ -110,13 +107,14 @@ fun HugeText(text: String, modifier: Modifier = Modifier, maxLines: Int = 1) = T
 @Composable
 fun ScrollableText(
     modifier: Modifier = Modifier,
+    autoScroll: Boolean = true,
     content: @Composable RowScope.() -> Unit
 ) {
     val state = rememberScrollState()
     val inner = remember { mutableStateOf(IntSize.Zero) }
     val outer = remember { mutableStateOf(IntSize.Zero) }
 
-    if (get<Prefs>().playTextAnimations.get()) {
+    if (get<Prefs>().playTextAnimations.get() and autoScroll) {
         val effect: suspend (ScrollState) -> Unit = {
             state.scrollTo(0)
             val scroll = (inner.value.width - outer.value.width)
