@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +24,7 @@ import org.koin.androidx.compose.get
 @Composable
 fun AppImage(app: AppInstalled, onIgnore: (String) -> Unit = {}) = Box {
 	LoadingImageApp(app.packageName)
-	TextBubble(getAppVersion(app), Modifier.align(Alignment.BottomStart), true)
+	TextBubble(getAppVersion(app), Modifier.align(Alignment.BottomStart).widthIn(max = 120.dp), true)
 	IgnoreIcon(
 		app.ignored,
 		{ onIgnore(app.packageName) },
@@ -36,7 +37,7 @@ fun AppImage(app: AppInstalled, onIgnore: (String) -> Unit = {}) = Box {
 @Composable
 fun UpdateImage(app: AppUpdate, onInstall: (String) -> Unit = {}) = Box {
 	LoadingImageApp(app.packageName)
-	TextBubble(getAppVersion(app), Modifier.align(Alignment.BottomStart), true)
+	TextBubble(getAppVersion(app), Modifier.align(Alignment.BottomStart).widthIn(max = 120.dp), true)
 	InstallProgressIcon(app.isInstalling) { onInstall(app.link) }
 	SourceIcon(
 		app.source,
@@ -51,7 +52,7 @@ fun UpdateImage(app: AppUpdate, onInstall: (String) -> Unit = {}) = Box {
 @Composable
 fun SearchImage(app: AppUpdate, onInstall: (String) -> Unit = {}) = Box {
 	LoadingImage(app.iconUri)
-	TextBubble(getAppVersion(app), Modifier.align(Alignment.BottomStart), true)
+	TextBubble(getAppVersion(app), Modifier.align(Alignment.BottomStart).widthIn(max = 120.dp), true)
 	InstallProgressIcon(app.isInstalling) { onInstall(app.link) }
 	SourceIcon(
 		app.source,
