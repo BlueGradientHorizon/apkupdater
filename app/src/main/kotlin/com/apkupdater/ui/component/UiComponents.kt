@@ -1,6 +1,8 @@
 package com.apkupdater.ui.component
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -24,7 +26,7 @@ import org.koin.androidx.compose.get
 @Composable
 fun AppImage(app: AppInstalled, onIgnore: (String) -> Unit = {}) = Box {
 	LoadingImageApp(app.packageName)
-	TextBubble(getAppVersion(app), Modifier.align(Alignment.BottomStart).widthIn(max = 120.dp), true)
+	TextBubble(getAppVersion(app), defaultTextBubbleModifier(), true)
 	IgnoreIcon(
 		app.ignored,
 		{ onIgnore(app.packageName) },
@@ -37,7 +39,7 @@ fun AppImage(app: AppInstalled, onIgnore: (String) -> Unit = {}) = Box {
 @Composable
 fun UpdateImage(app: AppUpdate, onInstall: (String) -> Unit = {}) = Box {
 	LoadingImageApp(app.packageName)
-	TextBubble(getAppVersion(app), Modifier.align(Alignment.BottomStart).widthIn(max = 120.dp), true)
+	TextBubble(getAppVersion(app), defaultTextBubbleModifier(), true)
 	InstallProgressIcon(app.isInstalling) { onInstall(app.link) }
 	SourceIcon(
 		app.source,
@@ -52,7 +54,7 @@ fun UpdateImage(app: AppUpdate, onInstall: (String) -> Unit = {}) = Box {
 @Composable
 fun SearchImage(app: AppUpdate, onInstall: (String) -> Unit = {}) = Box {
 	LoadingImage(app.iconUri)
-	TextBubble(getAppVersion(app), Modifier.align(Alignment.BottomStart).widthIn(max = 120.dp), true)
+	TextBubble(getAppVersion(app), defaultTextBubbleModifier(), true)
 	InstallProgressIcon(app.isInstalling) { onInstall(app.link) }
 	SourceIcon(
 		app.source,
@@ -117,3 +119,8 @@ fun getAppVersion(app: AppUpdate): String {
 		if (app.versionCode == 0L) "?"
 		else app.versionCode.toString()
 }
+
+@SuppressLint("ModifierFactoryExtensionFunction")
+@Composable
+fun BoxScope.defaultTextBubbleModifier() =
+	Modifier.align(Alignment.BottomStart).widthIn(max = 120.dp)
