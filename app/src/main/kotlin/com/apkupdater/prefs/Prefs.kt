@@ -17,6 +17,7 @@ class Prefs(
 	val excludeStore = boolean("excludeStore", defValue = false, backed = true)
 	val portraitColumns = int("portraitColumns", 3, true)
 	val landscapeColumns = int("landscapeColumns", 6, true)
+	val versionNameInsteadCode = boolean("versionNameInsteadCode", defValue = false, backed = true)
 	val playTextAnimations = boolean("playTextAnimaions", defValue = true, backed = true)
 	val ignoreAlpha = boolean("ignoreAlpha", defValue = true, backed = true)
 	val ignoreBeta = boolean("ignoreBeta", defValue = true, backed = true)
@@ -36,5 +37,4 @@ class Prefs(
 	val rootInstall = boolean("rootInstall", defValue = false, backed = true)
 	val theme = int("theme", defValue = 0, backed = true)
 	val lastTab = string("lastTab", defValue = Screen.Updates.route, backed = true)
-	val versionNameInsteadCode = boolean("versionNameInsteadCode", defValue = false, backed = true)
 }
